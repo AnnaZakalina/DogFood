@@ -1,11 +1,13 @@
-import {useState} from "react";
+import {useState, useContext} from "react";
 import {XOctagon} from "react-bootstrap-icons";
+import Ctx from "../../ctx";
 import "./style.css"
 const Modal = ({
     isActive, 
     setIsActive, 
     setUser
 }) => {
+    const {api} = useContext(Ctx);
     const [isReg, setIsReg] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -33,16 +35,8 @@ const Modal = ({
             body.group = "group-12"
         }
         console.log(body);
-        const path = `https://api.react-learning.ru/${isReg ? "signup" : "signin"}`;
-        const res = await fetch(path, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-        })
-        const data = await res.json();
-        console.log(data);
+        const data = await (isReg ? api.register(body) : api.auth(body))
+		console.log(data);
         if (isReg) {
             if (data?._id) {
             setIsReg(false);
@@ -64,7 +58,7 @@ const Modal = ({
         display: isActive ? "flex" : "none"
     }
     return <div className="modal-wrapper" style={st}>
-        <div className="modal">
+        <div className="modal__custom">
             <button className="modal-close" onClick={(e) => setIsActive(false)}><XOctagon/></button>
             <h3>{isReg ? "Регистрация" : "Вход"}</h3>
             <form onSubmit={handleForm}>

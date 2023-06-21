@@ -1,27 +1,23 @@
+import {useContext} from "react";
 import {Link} from "react-router-dom";
 import Logo from "./Logo";
 import {
     BalloonHeart, 
     Cart4, 
     Person, 
-    BuildingUp, 
-    BuildingDown
+    BuildingUp
 } from "react-bootstrap-icons";
+import Ctx from "../../ctx";
 import Search from "../Search";
 const Header = ({
     user, 
-    upd, 
     searchArr, 
     setGoods, 
-    setSearchResult,
     setModalOpen
 }) => {
+    const {basket} = useContext(Ctx);
     const login = () => {
         setModalOpen(true)
-    }
-    const logout = () => {
-        localStorage.removeItem("user");
-        upd(null);
     }
     return <header>
         <Logo/>
@@ -29,25 +25,25 @@ const Header = ({
             <Search 
                data={searchArr} 
                setGoods={setGoods} 
-               setSearchResult={setSearchResult}
             />
         </div>
         <nav className="header__menu">
             {user && <>
-            <Link to="/">
+            <Link to="/favorites">
                 <BalloonHeart title="Избранное"/>
             </Link>
-            <Link to="/">
+            <Link to="/basket" className="header__link">
                 <Cart4 title="Корзина"/>
+                {basket.length > 0 && <span className="header__badge">
+                    {basket.reduce((acc, el) => acc + el.cnt, 0)}
+                </span>}
             </Link>
-            <Link to="/">
+            <Link to="/profile">
                 <Person title="Личный кабинет"/>
             </Link>
-            </>
-            }
+            </>}
             <span>
                 {!user && <BuildingUp title="Войти" onClick={login}/>}
-                {user && <BuildingDown title="Выйти" onClick={logout}/>}
             </span>
         </nav>
     </header>
