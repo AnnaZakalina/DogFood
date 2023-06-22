@@ -33,10 +33,12 @@ footer {
 .footer__copy {
     display: grid;
     align-content: space-between;
+    font-family: sans-serif;
 }
 .footer__nav {
     display: grid;
     gap: 10px;
+    font-family: sans-serif;
 }
 .footer__nav a:hover {
     color: orange;

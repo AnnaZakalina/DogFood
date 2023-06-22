@@ -7,17 +7,21 @@ body {
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    font-family: sans-serif;
   }
   a {
     color: inherit;
     text-decoration: none;
+  }
+  h1 {
+    font-weight:bold;
   }
   ul {
     margin: 0;
     list-style: none;
   }
   p {
-    color: forestgreen;
+    color: black;
     font-size: 20px;
   }
   .container {
@@ -25,7 +29,6 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    align-content: flex-start;
   }
   .search-result {
     grid-column-end: span 3;
@@ -37,14 +40,35 @@ body {
       grid-template-columns: repeat(3, 1fr);
     }
   }
+  .banner {
+    padding: 50px;
+    background-color: yellow;
+    justify-items: right;
+  }
+button {
+   display: flex;
+   justify-content: center;
+   background-color: white;
+   font-family: sans-serif;
+   border: none;
+   color: black;
+   padding: 10px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 16px;
+  }
   .info {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: sans-serif;
   }
   .info-link {
     display: flex;
-    align-items: center;
+    font-family: sans-serif;
     cursor: pointer;
     text-shadow: 0 0 1px yellow;
     user-select: none;
